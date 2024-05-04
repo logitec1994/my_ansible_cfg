@@ -1,0 +1,74 @@
+---
+- name: First installation
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Steam (Flatpak)
+      flatpak:
+        name: com.valvesoftware.Steam
+        state: present
+    
+    - name: Install Telegram (Flatpak)
+      flatpak:
+        name: org.telegram.desktop
+        state: present
+    
+    - name: Install Discord (Flatpak)
+      flatpak:
+        name: com.discordapp.Discord
+        state: present
+
+    - name: Install VSCode (Flatpak)
+      flatpak:
+        name: com.visualstudio.code-oss
+        state: present
+
+    - name: Install KeePassXC (Flatpak)
+      flatpak:
+        name: org.keepassxc.KeePassXC
+        state: present
+
+    - name: Install qBittorrent (Flatpak)
+      flatpak:
+        name: org.qbittorrent.qBittorrent
+        state: present
+
+    - name: Install Firefox (Flatpak)
+      flatpak:
+        name: org.mozilla.firefox
+        state: present
+
+    - name: Install ExtensionManager (Flatpak)
+      flatpak:
+        name: com.mattjakeman.ExtensionManager
+        state: present
+
+    - name: Install ZSH (Pacman)
+      pacman:
+        name: zsh
+        state: present
+      become: true
+
+    - name: Install Git (Pacman)
+      pacman:
+        name: git
+        state: present
+      become: true
+
+    - name: Install Tilix (Pacman)
+      pacman:
+        name: tilix
+        state: present
+      become: true
+
+    - name: Set window buttons 'minimize,maximize,close'
+      dconf:
+        key: "/org/gnome/desktop/wm/preferences/button-layout"
+        value: "'appmenu:minimize,maximize,close'"
+        state: present
+
+    - name: Switch input source options
+      dconf:
+        key: "/org/gnome/desktop/wm/keybindings/switch-input-source"
+        value: "['<Alt>Shift_L', '<Shift>Alt_L']"
+        state: present
